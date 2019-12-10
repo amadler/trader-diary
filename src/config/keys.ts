@@ -1,0 +1,1 @@
+export const mongoDbUri = 'mongodb+srv://amadler:<passw>@tradediary-pt9sj.mongodb.net/test?retryWrites=true&w=majority'

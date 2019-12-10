@@ -1,30 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { InstrumentSchema } from './schema/instrument.schema';
-import { instrumentsMock } from './mock/instruments.mock';
 import { UpdateInstrument } from './dto/Instrument.update';
 import { CreateInstrument } from './dto/Instrument.crete';
-
+import { InstrumentInterface } from './interfaces/instrument.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 @Injectable()
 export class InstrumentService {
+    constructor(@InjectModel('Instrument') private readonly instrumentModel: Model<InstrumentInterface>) {}
 
-    getInstruments(): InstrumentSchema[]{
-        return instrumentsMock;
+    async getInstruments(): Promise<InstrumentInterface[]> {
+        return await this.instrumentModel.find();
     }
 
-    getInstrument( instrumentId: number): InstrumentSchema{
-        return instrumentsMock.find( v => v.instrumentId === instrumentId);
+    async getInstrument( instrumentId: string): Promise<InstrumentInterface> {
+        return await this.instrumentModel.findOne({ _id: instrumentId});
     }
 
-    createInstrument( query: CreateInstrument): InstrumentSchema{
-        const instrumentId = instrumentsMock[instrumentsMock.length].instrumentId;
-        instrumentsMock.push( new InstrumentSchema( instrumentId + 1, 'nzdcad', 'New Zeland Dollar Canadian Dollar', 0.232345 ));
-        return instrumentsMock[instrumentsMock.length]
+    async createInstrument( query: CreateInstrument ): Promise<InstrumentInterface> {
+        const newInstrument = new this.instrumentModel(query);
+        console.log(newInstrument)
+        return await this.instrumentModel.save(newInstrument);
     }
-    updateInstrument( query: UpdateInstrument): InstrumentSchema{
-        return query as InstrumentSchema;
+    async updateInstrument(instrumentId: string, query: UpdateInstrument): Promise<InstrumentInterface> {
+        const newInstrument = new this.instrumentModel(query);
+        return await this.instrumentModel.findByIdAndUpdate(instrumentId, query, { new: true });
     }
 
-    deleteInstrument( instrumentId: number): number{
-        return instrumentId;
+    async deleteInstrument( instrumentId: string): Promise<InstrumentInterface> {
+        return await this.instrumentModel.findByIdAndRemove(instrumentId);
     }
 }
