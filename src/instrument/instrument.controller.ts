@@ -20,9 +20,9 @@ export class InstrumentController {
         return this.instrumentService.createInstrument(createInstrumentDto);
     }
 
-    @Put()
-    updateInstrument( instrumentId: string, @Body() updateInstrument: UpdateInstrument): Promise<InstrumentInterface> {
-        return this.instrumentService.updateInstrument(instrumentId, updateInstrument);
+    @Put(':id')
+    updateInstrument( @Param() params, @Body() updateInstrument: UpdateInstrument): Promise<InstrumentInterface> {
+        return this.instrumentService.updateInstrument(params.id, updateInstrument);
     }
 
     @Delete(':id')
