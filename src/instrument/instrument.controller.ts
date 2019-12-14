@@ -1,33 +1,32 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
-import { InstrumentSchema } from './schema/instrument.schema';
 import { CreateInstrument } from './dto/Instrument.crete';
 import { UpdateInstrument } from './dto/Instrument.update';
 import { InstrumentService } from './instrument.service';
-
+import { InstrumentInterface } from './interfaces/instrument.interface';
 
 @Controller('instrument')
 export class InstrumentController {
     constructor( private instrumentService: InstrumentService) {}
     @Get()
-    getInstruments(): InstrumentSchema[]{
+    getInstruments(): Promise<InstrumentInterface[]> {
         return this.instrumentService.getInstruments();
     }
     @Get(':id')
-    getInstrument(@Param() params): InstrumentSchema{
+    getInstrument(@Param() params): Promise<InstrumentInterface> {
         return this.instrumentService.getInstrument( params.id );
     }
     @Post()
-    createInstrument( @Body() createInstrumentDto: CreateInstrument): InstrumentSchema{
+    createInstrument( @Body() createInstrumentDto: CreateInstrument): Promise<InstrumentInterface> {
         return this.instrumentService.createInstrument(createInstrumentDto);
     }
 
-    @Put()
-    updateInstrument( @Body() updateInstrument: UpdateInstrument): InstrumentSchema{
-        return this.instrumentService.updateInstrument(updateInstrument);
+    @Put(':id')
+    updateInstrument( @Param() params, @Body() updateInstrument: UpdateInstrument): Promise<InstrumentInterface> {
+        return this.instrumentService.updateInstrument(params.id, updateInstrument);
     }
 
     @Delete(':id')
-    deleteInstrument( @Param() params ): number{
+    deleteInstrument( @Param() params ): Promise<InstrumentInterface> {
         return this.instrumentService.deleteInstrument(params.id);
     }
 }

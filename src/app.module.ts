@@ -4,11 +4,13 @@ import { AppService } from './app.service';
 import { InstrumentController } from './instrument/instrument.controller';
 
 import { PositionsModule } from './positions/positions.module';
-import { InstrumentService } from './instrument/instrument.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { mongoDbUri } from './config/keys';
+import { InstrumentsModule } from './instrument/instruments.module';
 
 @Module({
-  imports: [PositionsModule],
-  controllers: [AppController, InstrumentController],
-  providers: [AppService, InstrumentService],
+  imports: [PositionsModule, MongooseModule.forRoot(mongoDbUri), InstrumentsModule],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
