@@ -1,10 +1,9 @@
 import { Injectable, Put } from '@nestjs/common';
-import { UpdateInstrument } from './dto/Instrument.update';
-import { CreateInstrument } from './dto/Instrument.crete';
+import { InstrumentUpdateDto } from './dto/Instrument.update';
+import { InstrumentCreateDto } from './dto/Instrument.crete';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Document } from 'mongoose';
 import { InstrumentInterface } from './interfaces/instrument.interface';
-import { InstrumentSchema } from './schema/instrument.schema';
 
 interface InstrumentInterfaceModel extends InstrumentInterface, Document {}
 
@@ -20,12 +19,11 @@ export class InstrumentService {
         return await this.instrumentModel.findOne({ _id: instrumentId});
     }
 
-    async createInstrument( query: CreateInstrument ): Promise<InstrumentInterface> {
+    async createInstrument( query: InstrumentCreateDto ): Promise<InstrumentInterface> {
         const newInstrument = new this.instrumentModel(query);
-        console.log(newInstrument)
         return await this.instrumentModel.create(newInstrument);
     }
-    async updateInstrument(instrumentId: string, query: UpdateInstrument): Promise<InstrumentInterface> {
+    async updateInstrument(instrumentId: string, query: InstrumentUpdateDto): Promise<InstrumentInterface> {
         const newInstrument = new this.instrumentModel(query);
         return await this.instrumentModel.findByIdAndUpdate(instrumentId, query, { new: true });
     }

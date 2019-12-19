@@ -39,3 +39,5 @@ content-type: application/json
     "Name": "US Dollar Nuca Colla Caps",
     "price": 10.232345
 }
+
+DELETE  http://localhost:3000/instrument/5df4f562cf1b9015782955c5
