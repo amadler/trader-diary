@@ -1,4 +1,4 @@
-export class CreateInstrument{
+export class InstrumentCreateDto{
     constructor(    
         public ticker: string,
         public Name: string,

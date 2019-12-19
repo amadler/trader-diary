@@ -1,0 +1,32 @@
+GET http://localhost:3000/setup
+
+POST http://localhost:3000/setup HTTP/1.1
+content-type: application/json
+
+{	
+    "instrumentId": "5df4f562cf1b9015782955c5",
+    "createDate": "1576793894699",
+    "memo": "memo",
+    "priority": 1,
+    "strategyId": 1
+}
+
+POST http://localhost:3000/setup HTTP/1.1
+content-type: application/json
+
+
+GET http://localhost:3000/setup/5dfbf7ad7151c336d424f854
+
+
+PUT http://localhost:3000/setup/5dfbf7ad7151c336d424f854 HTTP/1.1
+content-type: application/json
+
+{	
+    "instrumentId": "5df4f562cf1b9015782955c5",
+    "createDate": "1576793894699",
+    "memo": "memo2",
+    "priority": 1,
+    "strategyId": 1
+}
+
+DELETE http://localhost:3000/setup/5dfbf7ad7151c336d424f854

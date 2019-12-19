@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
-import { CreateInstrument } from './dto/Instrument.crete';
-import { UpdateInstrument } from './dto/Instrument.update';
+import { InstrumentCreateDto } from './dto/Instrument.crete';
+import { InstrumentUpdateDto } from './dto/Instrument.update';
 import { InstrumentService } from './instrument.service';
 import { InstrumentInterface } from './interfaces/instrument.interface';
 
@@ -16,12 +16,12 @@ export class InstrumentController {
         return this.instrumentService.getInstrument( params.id );
     }
     @Post()
-    createInstrument( @Body() createInstrumentDto: CreateInstrument): Promise<InstrumentInterface> {
+    createInstrument( @Body() createInstrumentDto: InstrumentCreateDto): Promise<InstrumentInterface> {
         return this.instrumentService.createInstrument(createInstrumentDto);
     }
 
     @Put(':id')
-    updateInstrument( @Param() params, @Body() updateInstrument: UpdateInstrument): Promise<InstrumentInterface> {
+    updateInstrument( @Param() params, @Body() updateInstrument: InstrumentUpdateDto): Promise<InstrumentInterface> {
         return this.instrumentService.updateInstrument(params.id, updateInstrument);
     }
 
