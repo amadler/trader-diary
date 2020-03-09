@@ -1,0 +1,17 @@
+<h1>List of setups</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>memo</th>
+      <th>createDate</th>
+      <th>priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let setup of setups">
+      <td scope="row">{{setup.memo}}</td>
+      <td>{{setup.createDate}}</td>
+      <td>{{setup.priority}}</td>
+    </tr>
+  </tbody>
+</table>

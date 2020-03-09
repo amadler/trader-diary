@@ -2,7 +2,7 @@ export class SetupCreateDto {
     constructor(
         public instrumentId: string,
         public ticker: string,
-        public Name: string,
+        public name: string,
         public price: number,
         ) {
     }

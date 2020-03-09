@@ -5,7 +5,7 @@ content-type: application/json
 
 {	
 	"ticker": "eurusd",
-    "Name": "Euro US Dollar",
+    "name": "Euro US Dollar",
     "price": 1.232345
 }
 
@@ -14,7 +14,7 @@ content-type: application/json
 
 {	
 	"ticker": "usdjpy",
-    "Name": "US Dollar Japaneese Yen",
+    "name": "US Dollar Japaneese Yen",
     "price": 0.232345
 }
 
@@ -23,7 +23,7 @@ content-type: application/json
 
 {	
 	"ticker": "audusd",
-    "Name": "US Dollar Australian Dollar",
+    "name": "US Dollar Australian Dollar",
     "price": 0.232345
 }
 
@@ -36,8 +36,8 @@ content-type: application/json
 
 {	
 	"ticker": "usdncc",
-    "Name": "US Dollar Nuca Colla Caps",
+    "name": "US Dollar Nuca Colla Caps",
     "price": 10.232345
 }
 
-DELETE  http://localhost:3000/instrument/5df4f562cf1b9015782955c5
+DELETE  http://localhost:3000/instrument/5e628ecfd1127d26a0609aef
