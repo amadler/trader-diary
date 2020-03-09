@@ -3,7 +3,7 @@ export class SetupUpdateDto {
         public setupId: string,
         public instrumentId: string,
         public ticker: string,
-        public Name: string,
+        public name: string,
         public price: number,
         ) {
     }

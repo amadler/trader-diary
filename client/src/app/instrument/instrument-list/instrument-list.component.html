@@ -1,0 +1,21 @@
+<h1>List of instruments</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ticker</th>
+      <th>name</th>
+      <th>price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let instrument of instruments">
+      <td scope="row">{{instrument.ticker}}</td>
+      <td>{{instrument.name}}</td>
+      <td>{{instrument.price}} </td>
+      <td>
+        <button type="button" (click)="delete(instrument._id)">delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

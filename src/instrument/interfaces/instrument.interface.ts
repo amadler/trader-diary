@@ -1,6 +1,6 @@
 export interface InstrumentInterface {
     instrumentId: string;
     ticker: string;
-    Name: string;
+    name: string;
     price: number;
 }
