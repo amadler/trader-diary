@@ -1,7 +1,6 @@
 import { Component, OnInit, Injector, AfterViewInit } from '@angular/core';
 import { InstrumentInterface } from '../interfaces/instrument.interface';
 import { InstrumentsService } from '../instruments.service';
-import { Crud } from '../../core/class/Crud';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,18 +8,21 @@ import { Observable } from 'rxjs';
   templateUrl: './instrument-list.component.html',
   styleUrls: ['./instrument-list.component.scss']
 })
-export class InstrumentListComponent extends Crud<InstrumentInterface, InstrumentsService> implements AfterViewInit {
+export class InstrumentListComponent implements AfterViewInit {
   public instruments: InstrumentInterface[];
   public service: InstrumentsService;
   constructor(
      injector: Injector
 
   ) {
-    super( injector );
     this.service = injector.get(InstrumentsService);
 
   }
-
+  getList(){
+    this.service.getList().subscribe((val) => {
+      this.instruments = val;
+    });
+  }
   create() {}
   delete(id: string){
     this.service.delete(id).subscribe( (val) => {
@@ -29,8 +31,6 @@ export class InstrumentListComponent extends Crud<InstrumentInterface, Instrumen
     } );
   }
   ngAfterViewInit(){
-    this.listSelector.subscribe((val) => {
-      this.instruments = val;
-    });
+    this.getList();
   }
 }
