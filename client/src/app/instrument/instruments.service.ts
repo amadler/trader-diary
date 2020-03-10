@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { InstrumentInterface } from './interfaces/instrument.interface';
+import {CrudService} from '../core/services/crud.service';
+const _baseString = 'http://localhost:3000/instrument';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InstrumentsService {
-  constructor(
-    private http: HttpClient
-  ) { }
-  public getList(): Observable<InstrumentInterface[]> {
-    return  this.http.get<InstrumentInterface[]>('http://localhost:3000/instrument');
-  }
 
-  public delete( id: string): Observable<InstrumentInterface> {
-    return  this.http.delete<InstrumentInterface>(`http://localhost:3000/instrument/${id}`);
+export class InstrumentsService extends CrudService<InstrumentInterface, string>{
+  protected BASE_API: string;
+  constructor(
+    protected http: HttpClient
+  ) {
+    super(http, _baseString);
+    this.BASE_API = _baseString;
   }
 }
